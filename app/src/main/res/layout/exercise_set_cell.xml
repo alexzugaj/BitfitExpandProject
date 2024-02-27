@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemCellContainer"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    app:cardCornerRadius="10dp"
+    app:cardBackgroundColor="@color/cellBGColor"
+    android:layout_margin="5dp"
+    app:cardElevation="10dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            >
+
+            <TextView
+                android:id="@+id/exerciseName"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="Exercise Name"
+                android:textColor="#FFFFFF"/>
+
+            <!-- Calories value and label container -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_marginStart="8dp">
+
+                <!-- Calories numeric value -->
+                <TextView
+                    android:id="@+id/repsValue"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="val"
+                    android:textColor="#FFFFFF"/>
+
+                <!-- Calories label -->
+                <TextView
+                    android:id="@+id/repsLabel"
+                    style="@style/TextAppearance.AppCompat.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="Sets"
+                    android:textColor="#FFFFFF"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

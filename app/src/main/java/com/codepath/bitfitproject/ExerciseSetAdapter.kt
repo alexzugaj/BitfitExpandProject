@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.codepath.bitfitproject.databinding.ExerciseSetCellBinding
 
-class ExerciseSetAdapter (private val context: Context, private val exercises: List<ExerciseSet>) :
+class ExerciseSetAdapter (private val exercises: List<ExerciseSet>, private val clickListener: MainActivity) :
     RecyclerView.Adapter<ExerciseSetAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseSetAdapter.ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_article, parent, false)
-        return ViewHolder(view)
+        val from = LayoutInflater.from(parent.context)
+        val binding = ExerciseSetCellBinding.inflate(from, parent, false)
+        return ViewHolder(parent.context, binding)
     }
 
     override fun onBindViewHolder(holder: ExerciseSetAdapter.ViewHolder, position: Int) {
@@ -20,9 +22,13 @@ class ExerciseSetAdapter (private val context: Context, private val exercises: L
     }
 
     override fun getItemCount() = exercises.size
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(
+        private val context: Context,
+        private val binding: ExerciseSetCellBinding,
+    ): RecyclerView.ViewHolder(binding.root) {
         fun bind(exercise: ExerciseSet) {
-
+            binding.exerciseName.text = exercise.exerciseName
+            binding.repsValue.text = exercise.reps.toString()
         }
     }
 }

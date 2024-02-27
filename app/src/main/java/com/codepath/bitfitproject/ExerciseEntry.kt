@@ -8,5 +8,5 @@ import androidx.room.PrimaryKey
 data class ExerciseEntry (
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     @ColumnInfo(name = "exerciseName") val exerciseName: String?,
-    @ColumnInfo(name = "numReps") val reps: Int?
+    @ColumnInfo(name = "reps") val reps: Int?
 )
