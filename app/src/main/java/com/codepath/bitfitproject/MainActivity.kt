@@ -30,32 +30,46 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-/*
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.menu_stats -> setCurrentFragment(StatsFragment())
-                R.id.menu_foods -> setCurrentFragment(FoodFragment())
-            }
-            true
-        }
-        recyclerView = findViewById(R.id.exercises)
-        val mainActivity = activity as MainActivity
-        val exerciseAdapter = ExerciseSetAdapter(exercises, mainActivity)
+        val exerciseApplication = application as ExerciseApplication
         itemViewModel = ViewModelProvider(this).get(ItemViewModel::class.java)
-        itemViewModel.exerciseSetLiveData.observe(viewLifecycleOwner) { exerciseSets ->
-            recyclerView.layoutManager = LinearLayoutManager(requireContext())
-            recyclerView.adapter = ExerciseSetAdapter(exerciseSets, mainActivity)
-        }
-        binding.newFoodButton.setOnClickListener {
+        binding.newExerciseButton.setOnClickListener{
             NewItemSheet(null).show(supportFragmentManager, "newItemTag")
-
-            // Perform database operations (for example, clearing and inserting data)
-            setCurrentFragment(ExerciseFragment())
-
-        }*/
-
+            updateDatabase()
+        }
+        val mainActivity = this
+        itemViewModel.exerciseSetLiveData.observe(this) { foodItems ->
+            binding.exercises.apply {
+                layoutManager = LinearLayoutManager(applicationContext)
+                adapter = ExerciseSetAdapter(foodItems, mainActivity)
+            }
+        }
     }
+        /*
+                val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+                bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+                    when (menuItem.itemId) {
+                        R.id.menu_stats -> setCurrentFragment(StatsFragment())
+                        R.id.menu_foods -> setCurrentFragment(FoodFragment())
+                    }
+                    true
+                }
+                recyclerView = findViewById(R.id.exercises)
+                val mainActivity = activity as MainActivity
+                val exerciseAdapter = ExerciseSetAdapter(exercises, mainActivity)
+                itemViewModel = ViewModelProvider(this).get(ItemViewModel::class.java)
+                itemViewModel.exerciseSetLiveData.observe(viewLifecycleOwner) { exerciseSets ->
+                    recyclerView.layoutManager = LinearLayoutManager(requireContext())
+                    recyclerView.adapter = ExerciseSetAdapter(exerciseSets, mainActivity)
+                }
+                binding.newFoodButton.setOnClickListener {
+                    NewItemSheet(null).show(supportFragmentManager, "newItemTag")
+
+                    // Perform database operations (for example, clearing and inserting data)
+                    setCurrentFragment(ExerciseFragment())
+
+                }*/
+
+
 
     /*private fun setCurrentFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply {
@@ -73,7 +87,10 @@ class MainActivity : AppCompatActivity() {
         GlobalScope.launch(Dispatchers.IO) {
             // Delete all entries from the database
             exerciseDao.deleteAll()
+            val newItem = ExerciseSet (exerciseName = "New Exercise", reps = 5)
+            insertNewItemToDatabase(newItem)
         }
+
     }
 
 

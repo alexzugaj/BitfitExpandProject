@@ -25,14 +25,14 @@ class NewItemSheet(var exerciseSet: ExerciseSet?) : BottomSheetDialogFragment()
 
         if (exerciseSet != null)
         {
-            binding.exerciseTitle.text = "Edit Item"
+            binding.exerciseTitle.text = "Edit Exercise"
             val editable = Editable.Factory.getInstance()
             binding.exerciseName.text = editable.newEditable(exerciseSet!!.exerciseName)
             binding.reps.text = editable.newEditable(exerciseSet!!.reps.toString())
         }
         else
         {
-            binding.exerciseTitle.text = "Add Food"
+            binding.exerciseTitle.text = "Add Exercise"
         }
 
         itemViewModel = ViewModelProvider(activity).get(ItemViewModel::class.java)

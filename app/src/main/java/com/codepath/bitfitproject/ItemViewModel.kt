@@ -25,7 +25,7 @@ class ItemViewModel(application: Application) : AndroidViewModel(application){
         exerciseSetLiveData.postValue(list)
         // Print/log the contents of foodItemsLiveData
         list.forEach { item ->
-            println("Added Food Item: ${item.exerciseName}, Calories: ${item.reps}")
+            println("Added Exercise: ${item.exerciseName}, Reps: ${item.reps}")
         }
         insertNewItemToDatabase(newItem)
 

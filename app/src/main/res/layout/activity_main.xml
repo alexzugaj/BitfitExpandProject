@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Exercise"
-        android:id="@+id/newFoodButton"
+        android:id="@+id/newExerciseButton"
         android:backgroundTint="?attr/colorPrimary"
         android:textColor="?colorOnPrimary"
         android:layout_margin="20dp"
