@@ -1,4 +1,4 @@
-package com.codepath.articlesearch
+package com.codepath.bitfitproject
 
 import android.os.Bundle
 import android.util.Log
@@ -7,7 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.codepath.articlesearch.databinding.ActivityMainBinding
+import com.codepath.bitfitproject.databinding.ActivityMainBinding
 import com.codepath.asynchttpclient.AsyncHttpClient
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import kotlinx.coroutines.Dispatchers.IO

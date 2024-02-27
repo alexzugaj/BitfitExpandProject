@@ -1,4 +1,4 @@
-package com.codepath.articlesearch
+package com.codepath.bitfitproject
 
 import androidx.room.Dao
 import androidx.room.Insert

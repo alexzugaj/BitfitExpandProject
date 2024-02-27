@@ -1,4 +1,4 @@
-package com.codepath.articlesearch
+package com.codepath.bitfitproject
 
 import android.os.Bundle
 import android.widget.ImageView

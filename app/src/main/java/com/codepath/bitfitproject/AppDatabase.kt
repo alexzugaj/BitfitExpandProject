@@ -1,4 +1,4 @@
-package com.codepath.articlesearch
+package com.codepath.bitfitproject
 
 import android.content.Context
 import androidx.room.Database

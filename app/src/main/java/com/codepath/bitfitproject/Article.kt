@@ -1,4 +1,4 @@
-package com.codepath.articlesearch
+package com.codepath.bitfitproject
 
 import android.support.annotation.Keep
 import kotlinx.serialization.SerialName

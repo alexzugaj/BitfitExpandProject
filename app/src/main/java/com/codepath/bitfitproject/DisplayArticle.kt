@@ -1,5 +1,5 @@
-package com.codepath.articlesearch
-import kotlinx.serialization.Serializable
+package com.codepath.bitfitproject
+
 data class DisplayArticle(
     val headline: String?,
     val abstract: String?,
