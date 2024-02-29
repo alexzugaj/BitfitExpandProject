@@ -54,50 +54,11 @@ class MainActivity : AppCompatActivity() {
         }
         setRecyclerView()
     }
-        /*
-                val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-                bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
-                    when (menuItem.itemId) {
-                        R.id.menu_stats -> setCurrentFragment(StatsFragment())
-                        R.id.menu_foods -> setCurrentFragment(FoodFragment())
-                    }
-                    true
-                }
-                recyclerView = findViewById(R.id.exercises)
-                val mainActivity = activity as MainActivity
-                val exerciseAdapter = ExerciseSetAdapter(exercises, mainActivity)
-                itemViewModel = ViewModelProvider(this).get(ItemViewModel::class.java)
-                itemViewModel.exerciseSetLiveData.observe(viewLifecycleOwner) { exerciseSets ->
-                    recyclerView.layoutManager = LinearLayoutManager(requireContext())
-                    recyclerView.adapter = ExerciseSetAdapter(exerciseSets, mainActivity)
-                }
-                binding.newFoodButton.setOnClickListener {
-                    NewItemSheet(null).show(supportFragmentManager, "newItemTag")
-
-                    // Perform database operations (for example, clearing and inserting data)
-                    setCurrentFragment(ExerciseFragment())
-
-                }*/
-
-
-
-    /*private fun setCurrentFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.container, fragment)
-            commit()
-        }
-    }*/
-
-
-    // Function to perform database operations
     private fun updateDatabase() {
         val exerciseDao = (application as ExerciseApplication).db.exerciseDao()
 
-        // Perform database operations on a background thread
         lifecycleScope.launch(Dispatchers.IO) {
-            // Delete all entries from the database
             exerciseDao.deleteAll()
-
         }
 
     }
@@ -107,7 +68,6 @@ class MainActivity : AppCompatActivity() {
         val exerciseEntry = ExerciseEntry(exerciseName = newItem.exerciseName, reps = newItem.reps)
         val exerciseDao = (application as ExerciseApplication).db.exerciseDao()
 
-        // Insert the new entry into the database
         exerciseDao.insert(exerciseEntry)
     }
     private fun setRecyclerView() {
