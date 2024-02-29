@@ -55,7 +55,7 @@ class NewItemSheet(var exerciseSet: ExerciseSet?) : BottomSheetDialogFragment()
             val reps = repsStr.toInt() // Parse the calories as an Int
             if (exerciseSet == null) {
                 val newSet = ExerciseSet(exerciseName = exerciseName, reps = reps)
-                itemViewModel.addWishItem(newSet)
+                itemViewModel.addExerciseItem(newSet)
             }
             binding.exerciseName.setText("")
             binding.reps.setText("")

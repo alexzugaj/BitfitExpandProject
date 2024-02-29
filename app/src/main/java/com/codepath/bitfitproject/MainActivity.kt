@@ -13,7 +13,6 @@ import androidx.lifecycle.observe
 import com.codepath.bitfitproject.databinding.ActivityMainBinding
 import kotlinx.coroutines.Dispatchers
 
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -22,6 +21,7 @@ import kotlinx.coroutines.launch
 private const val TAG = "MainActivity/"
 
 class MainActivity : AppCompatActivity() {
+    private val exercises = mutableListOf<ExerciseSet>()
     private lateinit var recyclerView: RecyclerView
     private lateinit var binding: ActivityMainBinding
     private lateinit var itemViewModel: ItemViewModel
@@ -37,12 +37,22 @@ class MainActivity : AppCompatActivity() {
             updateDatabase()
         }
         val mainActivity = this
-        itemViewModel.exerciseSetLiveData.observe(this) { foodItems ->
-            binding.exercises.apply {
-                layoutManager = LinearLayoutManager(applicationContext)
-                adapter = ExerciseSetAdapter(foodItems, mainActivity)
+        val exerciseAdapter = ExerciseSetAdapter(exercises, mainActivity)
+        lifecycleScope.launch {
+            (application as ExerciseApplication).db.exerciseDao().getAll().collect { databaseList ->
+                databaseList.map { entity ->
+                    ExerciseSet(
+                        entity.exerciseName,
+                        entity.reps
+                    )
+                }.also { mappedList ->
+                    exercises.clear()
+                    exercises.addAll(mappedList)
+                    exerciseAdapter.notifyDataSetChanged()
+                }
             }
         }
+        setRecyclerView()
     }
         /*
                 val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
@@ -84,11 +94,10 @@ class MainActivity : AppCompatActivity() {
         val exerciseDao = (application as ExerciseApplication).db.exerciseDao()
 
         // Perform database operations on a background thread
-        GlobalScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch(Dispatchers.IO) {
             // Delete all entries from the database
             exerciseDao.deleteAll()
-            val newItem = ExerciseSet (exerciseName = "New Exercise", reps = 5)
-            insertNewItemToDatabase(newItem)
+
         }
 
     }
@@ -99,7 +108,16 @@ class MainActivity : AppCompatActivity() {
         val exerciseDao = (application as ExerciseApplication).db.exerciseDao()
 
         // Insert the new entry into the database
-        exerciseDao.insertAll(listOf(exerciseEntry))
+        exerciseDao.insert(exerciseEntry)
+    }
+    private fun setRecyclerView() {
+        val mainActivity = this
+        itemViewModel.exerciseSetLiveData.observe(this) { exerciseItems ->
+            binding.exercises.apply {
+                layoutManager = LinearLayoutManager(applicationContext)
+                adapter = ExerciseSetAdapter(exerciseItems, mainActivity)
+            }
+        }
     }
 
 }

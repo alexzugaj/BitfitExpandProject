@@ -2,9 +2,7 @@ package com.codepath.bitfitproject
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -19,7 +17,7 @@ class ItemViewModel(application: Application) : AndroidViewModel(application){
         exerciseSetLiveData.value = mutableListOf()
     }
 
-    fun addWishItem(newItem: ExerciseSet) {
+    fun addExerciseItem(newItem: ExerciseSet) {
         val list = exerciseSetLiveData.value?.toMutableList() ?: mutableListOf()
         list.add(newItem)
         exerciseSetLiveData.postValue(list)
