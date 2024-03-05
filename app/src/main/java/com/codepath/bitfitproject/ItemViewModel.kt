@@ -2,6 +2,7 @@ package com.codepath.bitfitproject
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 import kotlinx.coroutines.Dispatchers
@@ -37,4 +38,16 @@ class ItemViewModel(application: Application) : AndroidViewModel(application){
             setEntryDao.insertAll(listOf(exerciseEntry))
         }
     }
+    fun getAvgReps(): LiveData<Float> {
+        return exerciseDao.getAvgReps()
+    }
+
+    fun getMinReps(): LiveData<Int> {
+        return exerciseDao.getMinReps()
+    }
+
+    fun getMaxReps(): LiveData<Int> {
+        return exerciseDao.getMaxReps()
+    }
+
 }

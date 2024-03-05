@@ -28,56 +28,47 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val exerciseFragment: Fragment = ExercisesFragment()
+        val statsFragment: Fragment = StatisticsFragment()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val exerciseApplication = application as ExerciseApplication
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            lateinit var fragment: Fragment
+            when (item.itemId) {
+                R.id.exercises -> fragment = exerciseFragment
+                R.id.statistics -> fragment = statsFragment
+            }
+            replaceFragment(fragment)
+            true
+        }
+
+        bottomNavigationView.selectedItemId = R.id.exercises
         itemViewModel = ViewModelProvider(this).get(ItemViewModel::class.java)
         binding.newExerciseButton.setOnClickListener{
             NewItemSheet(null).show(supportFragmentManager, "newItemTag")
-            updateDatabase()
+            replaceFragment(exerciseFragment)
         }
-        val mainActivity = this
-        val exerciseAdapter = ExerciseSetAdapter(exercises, mainActivity)
-        lifecycleScope.launch {
-            (application as ExerciseApplication).db.exerciseDao().getAll().collect { databaseList ->
-                databaseList.map { entity ->
-                    ExerciseSet(
-                        entity.exerciseName,
-                        entity.reps
-                    )
-                }.also { mappedList ->
-                    exercises.clear()
-                    exercises.addAll(mappedList)
-                    exerciseAdapter.notifyDataSetChanged()
-                }
-            }
-        }
-        setRecyclerView()
+
+        //setRecyclerView()
     }
-    private fun updateDatabase() {
-        val exerciseDao = (application as ExerciseApplication).db.exerciseDao()
-
-        lifecycleScope.launch(Dispatchers.IO) {
-            exerciseDao.deleteAll()
-        }
-
+    private fun replaceFragment(fragment : Fragment) {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frame_layout, fragment)
+        fragmentTransaction.commit()
     }
 
 
-    private fun insertNewItemToDatabase(newItem: ExerciseSet) {
-        val exerciseEntry = ExerciseEntry(exerciseName = newItem.exerciseName, reps = newItem.reps)
-        val exerciseDao = (application as ExerciseApplication).db.exerciseDao()
-
-        exerciseDao.insert(exerciseEntry)
-    }
-    private fun setRecyclerView() {
+    /*private fun setRecyclerView() {
         val mainActivity = this
         itemViewModel.exerciseSetLiveData.observe(this) { exerciseItems ->
-            binding.exercises.apply {
+            binding.exercise_recycler_view.apply {
                 layoutManager = LinearLayoutManager(applicationContext)
                 adapter = ExerciseSetAdapter(exerciseItems, mainActivity)
             }
         }
-    }
+    }*/
 
 }

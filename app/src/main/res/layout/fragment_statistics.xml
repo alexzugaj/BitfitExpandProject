@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".StatisticsFragment">
+
+    <TextView
+        android:id="@+id/highestRepsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16sp"
+        android:text="Highest # of Reps: "
+        android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/highestRepsVal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16sp"
+        android:layout_alignParentRight="true"
+        android:text=""
+        android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/lowestRepsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/highestRepsTextView"
+        android:layout_margin="16sp"
+        android:text="Lowest # of Reps: "
+        android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/lowestRepsVal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16sp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/highestRepsVal"
+        android:text=""
+        android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/averageRepsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16sp"
+        android:text="Average # of Reps: "
+        android:textSize="18sp"
+        android:layout_below= "@id/lowestRepsTextView"
+        />
+
+    <TextView
+        android:id="@+id/averageRepsVal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16sp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/lowestRepsVal"
+        android:text=""
+        android:textSize="18sp"/>
+</RelativeLayout>

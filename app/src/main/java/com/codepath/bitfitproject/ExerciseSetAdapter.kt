@@ -8,7 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.codepath.bitfitproject.databinding.ExerciseSetCellBinding
 
-class ExerciseSetAdapter (private val exercises: List<ExerciseSet>, private val clickListener: MainActivity) :
+class ExerciseSetAdapter (
+    private val exercises: List<ExerciseSet>,
+    private val clickListener: MainActivity) :
     RecyclerView.Adapter<ExerciseSetAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseSetAdapter.ViewHolder {
         val from = LayoutInflater.from(parent.context)

@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item
+        android:id="@+id/exercises"
+        android:enabled="true"
+        android:title="@string/exercise_tab"
+        android:icon="@drawable/baseline_list_alt_24"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/statistics"
+        android:enabled="true"
+        android:title="@string/stats_tab"
+        android:icon="@drawable/baseline_insert_chart_outlined_24"
+        app:showAsAction="ifRoom" />
 </menu>
